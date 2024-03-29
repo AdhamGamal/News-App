@@ -1,12 +1,37 @@
 package com.amg.newsapp.network.models
 
-class ArticleApiResponse(
-    val source: SourceApiResponse? = null,
-    val author: String? = null,
-    val title: String? = null,
-    val description: String? = null,
-    val url: String? = null,
-    val urlToImage: String? = null,
-    val publishedAt: String? = null,
-    val content: String? = null
+data class ArticleApiResponse(
+    private val source: SourceApiResponse? = null,
+    private val author: String? = null,
+    private val title: String? = null,
+    private val description: String? = null,
+    private val url: String? = null,
+    private val urlToImage: String? = null,
+    private val publishedAt: String? = null,
+    private val content: String? = null
+) {
+    fun toArticle(): Article {
+        return Article(
+            source?.toSource() ?: Source(),
+            author ?: "",
+            title ?: "",
+            description ?: "",
+            url ?: "",
+            urlToImage ?: "",
+            publishedAt ?: "",
+            content ?: "",
+        )
+    }
+}
+
+
+data class Article(
+    val source: Source = Source(),
+    val author: String = "",
+    val title: String = "",
+    val description: String = "",
+    val url: String = "",
+    val urlToImage: String = "",
+    val publishedAt: String = "",
+    val content: String = ""
 )
