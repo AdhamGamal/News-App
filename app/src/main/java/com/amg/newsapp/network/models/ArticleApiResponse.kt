@@ -1,5 +1,8 @@
 package com.amg.newsapp.network.models
 
+import com.amg.newsapp.database.models.ArticleEntity
+import com.amg.newsapp.database.models.SourceEntity
+
 data class ArticleApiResponse(
     private val source: SourceApiResponse? = null,
     private val author: String? = null,
@@ -34,4 +37,24 @@ data class Article(
     val urlToImage: String = "",
     val publishedAt: String = "",
     val content: String = ""
-)
+) {
+    fun getArticleEntity(): ArticleEntity {
+        return ArticleEntity(
+            source.id,
+            author,
+            title,
+            description,
+            url,
+            urlToImage,
+            publishedAt,
+            content,
+        )
+    }
+
+    fun getSourceEntity(): SourceEntity {
+        return SourceEntity(
+            source.id,
+            source.name
+        )
+    }
+}
