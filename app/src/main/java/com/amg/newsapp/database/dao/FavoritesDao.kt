@@ -8,7 +8,7 @@ import androidx.room.Transaction
 import com.amg.newsapp.database.models.ArticleEntity
 import com.amg.newsapp.database.models.ArticleWithSource
 import com.amg.newsapp.database.models.SourceEntity
-import com.amg.newsapp.network.models.Article
+import com.amg.newsapp.models.Article
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -2,8 +2,8 @@ package com.amg.newsapp.network.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.amg.newsapp.models.Article
 import com.amg.newsapp.network.api.NewsApiService
-import com.amg.newsapp.network.models.Article
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

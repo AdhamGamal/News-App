@@ -1,7 +1,7 @@
 package com.amg.newsapp.network.models
 
-import com.amg.newsapp.database.models.ArticleEntity
-import com.amg.newsapp.database.models.SourceEntity
+import com.amg.newsapp.models.Article
+import com.amg.newsapp.models.Source
 
 data class ArticleApiResponse(
     private val source: SourceApiResponse? = null,
@@ -23,38 +23,6 @@ data class ArticleApiResponse(
             urlToImage ?: "",
             publishedAt ?: "",
             content ?: "",
-        )
-    }
-}
-
-
-data class Article(
-    val source: Source = Source(),
-    val author: String = "",
-    val title: String = "",
-    val description: String = "",
-    val url: String = "",
-    val urlToImage: String = "",
-    val publishedAt: String = "",
-    val content: String = ""
-) {
-    fun getArticleEntity(): ArticleEntity {
-        return ArticleEntity(
-            source.id,
-            author,
-            title,
-            description,
-            url,
-            urlToImage,
-            publishedAt,
-            content,
-        )
-    }
-
-    fun getSourceEntity(): SourceEntity {
-        return SourceEntity(
-            source.id,
-            source.name
         )
     }
 }

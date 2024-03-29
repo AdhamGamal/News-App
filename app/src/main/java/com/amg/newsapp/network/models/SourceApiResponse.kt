@@ -1,5 +1,7 @@
 package com.amg.newsapp.network.models
 
+import com.amg.newsapp.models.Source
+
 data class SourceApiResponse(
     private val id: String? = null,
     private val name: String? = null
@@ -11,8 +13,3 @@ data class SourceApiResponse(
         )
     }
 }
-
-data class Source(
-    val id: String = "",
-    val name: String = ""
-)

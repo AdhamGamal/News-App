@@ -3,8 +3,8 @@ package com.amg.newsapp.network
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.amg.newsapp.models.Article
 import com.amg.newsapp.network.api.NewsApiService
-import com.amg.newsapp.network.models.Article
 import com.amg.newsapp.network.paging.NewsPagingSource
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow

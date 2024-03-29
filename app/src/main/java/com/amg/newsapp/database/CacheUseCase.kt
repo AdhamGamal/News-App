@@ -2,7 +2,7 @@ package com.amg.newsapp.database
 
 import com.amg.newsapp.database.dao.FavoritesDao
 import com.amg.newsapp.database.models.ArticleWithSource
-import com.amg.newsapp.network.models.Article
+import com.amg.newsapp.models.Article
 import javax.inject.Inject
 import javax.inject.Singleton
 
