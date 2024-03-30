@@ -1,7 +1,6 @@
 package com.amg.newsapp.network.models
 
 import com.amg.newsapp.models.Article
-import com.amg.newsapp.models.Source
 
 data class ArticleApiResponse(
     private val source: SourceApiResponse? = null,
@@ -15,7 +14,7 @@ data class ArticleApiResponse(
 ) {
     fun toArticle(): Article {
         return Article(
-            source?.toSource() ?: Source(),
+            source?.name ?: "",
             author ?: "",
             title ?: "",
             description ?: "",

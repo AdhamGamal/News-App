@@ -1,21 +1,21 @@
 package com.amg.newsapp.models
 
 import com.amg.newsapp.database.models.ArticleEntity
-import com.amg.newsapp.database.models.SourceEntity
 
 data class Article(
-    val source: Source = Source(),
+    val source: String = "",
     val author: String = "",
     val title: String = "",
     val description: String = "",
     val url: String = "",
     val urlToImage: String = "",
     val publishedAt: String = "",
-    val content: String = ""
+    val content: String = "",
+    var articleId: Long = DEFAULT_ID
 ) {
-    fun getArticleEntity(): ArticleEntity {
+    fun toArticleEntity(): ArticleEntity {
         return ArticleEntity(
-            source.id,
+            source,
             author,
             title,
             description,
@@ -26,10 +26,9 @@ data class Article(
         )
     }
 
-    fun getSourceEntity(): SourceEntity {
-        return SourceEntity(
-            source.id,
-            source.name
-        )
+    fun isFavorite() = articleId != DEFAULT_ID
+
+    companion object {
+        private const val DEFAULT_ID = -1L
     }
 }

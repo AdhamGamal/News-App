@@ -2,19 +2,12 @@ package com.amg.newsapp.database.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.amg.newsapp.models.Article
 
-@Entity(
-    tableName = "articles",
-    foreignKeys = [
-        ForeignKey(entity = SourceEntity::class, parentColumns = ["id"], childColumns = ["source_id"])
-    ],
-    indices = [Index("source_id")]
-)
+@Entity(tableName = "articles")
 data class ArticleEntity(
-    @ColumnInfo(name = "source_id") val sourceId: String = "",
+    @ColumnInfo(name = "source") val source: String = "",
     @ColumnInfo(name = "author") val author: String = "",
     @ColumnInfo(name = "title") val title: String = "",
     @ColumnInfo(name = "description") val description: String = "",
@@ -26,4 +19,10 @@ data class ArticleEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var articleId: Long = 0
+
+    fun toArticle(): Article {
+        return Article(
+            source, author, title, description, url, urlToImage, publishedAt, content, articleId
+        )
+    }
 }

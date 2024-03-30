@@ -7,13 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.amg.newsapp.database.CacheUseCase
-import com.amg.newsapp.models.Article
 import com.amg.newsapp.models.NoNetworkException
 import com.amg.newsapp.models.SearchMinCharacterException
 import com.amg.newsapp.network.NetworkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.launch
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -39,12 +37,6 @@ class SearchViewModel @Inject constructor(
             SearchAction.Loaded(networkUC.getSearchResultStream(query).cachedIn(viewModelScope))
         } catch (ex: Exception) {
             SearchAction.Error(NoNetworkException())
-        }
-    }
-
-    fun addToFavorite(article: Article) {
-        viewModelScope.launch {
-            cacheUC.addToFavorite(article)
         }
     }
 }

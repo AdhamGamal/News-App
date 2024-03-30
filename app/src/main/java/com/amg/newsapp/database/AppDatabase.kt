@@ -6,9 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.amg.newsapp.database.dao.FavoritesDao
 import com.amg.newsapp.database.models.ArticleEntity
-import com.amg.newsapp.database.models.SourceEntity
 
-@Database(entities = [ArticleEntity::class, SourceEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ArticleEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun favoritesDao(): FavoritesDao

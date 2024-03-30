@@ -21,9 +21,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.amg.newsapp.models.Article
 import com.amg.newsapp.models.NoNetworkException
 import com.amg.newsapp.models.SearchNotFoundException
-import com.amg.newsapp.ui.listitems.ArticleListItem
 import com.amg.newsapp.ui.layouts.ErrorLayout
 import com.amg.newsapp.ui.layouts.LoadingLayout
+import com.amg.newsapp.ui.listitems.ArticleListItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -46,7 +46,6 @@ fun SearchScreen(
             keyboardController?.hide()
         },
         onFavorite = {
-            viewModel.addToFavorite(it)
         },
         modifier = Modifier.fillMaxSize()
     )
