@@ -47,6 +47,8 @@ fun SearchScreen(
         },
         onFavorite = {
         },
+        onUnFavorite = {
+        },
         modifier = Modifier.fillMaxSize()
     )
 }
@@ -58,6 +60,7 @@ fun SearchScreen(
     onSearch: (String) -> Unit,
     onClear: (String) -> Unit,
     onFavorite: (Article) -> Unit,
+    onUnFavorite: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -103,6 +106,7 @@ fun SearchScreen(
                                         ArticleListItem(
                                             it,
                                             onFavorite,
+                                            onUnFavorite,
                                             Modifier.fillMaxWidth()
                                         )
                                     }
@@ -136,7 +140,7 @@ fun SearchScreen(
 private fun GalleryScreenPreview(
     @PreviewParameter(GalleryScreenPreviewParamProvider::class) articles: Flow<PagingData<Article>>
 ) {
-    SearchScreen(SearchAction.Loaded(articles), {}, {}, {}, Modifier.fillMaxSize())
+    SearchScreen(SearchAction.Loaded(articles), {}, {}, {}, {}, Modifier.fillMaxSize())
 }
 
 private class GalleryScreenPreviewParamProvider :
