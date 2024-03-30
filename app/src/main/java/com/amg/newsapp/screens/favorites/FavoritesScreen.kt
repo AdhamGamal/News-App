@@ -63,24 +63,7 @@ fun FavoritesScreen(
 @Composable
 private fun GalleryScreenPreview() {
     FavoritesScreen(
-        FavoritesAction.Loaded(
-            listOf(
-                Article(
-                    author = "John Pike",
-                    title = "U.S., Seychelles Conduct Bilateral Maritime Security engagements",
-                    description = "Over the course of 7 days from March 14-21, 2024, United States Coast Guard Law Enforcement Detachment (LEDET) personnel worked alongside their counterparts in the Seychelles Coast Guard during multiple bilateral maritime security engagements in Seychelles' E…",
-                    url = "https://www.globalsecurity.org/military/library/news/2024/03/mil-240324-usn02.htm",
-                    publishedAt = "2024-03-27T09:14:44Z",
-                ),
-                Article(
-                    author = "John Pike",
-                    title = "Treasury Sanctions Financial Facilitators and Illicit Drug Traffickers Supporting the Syrian Regime",
-                    description = "Today, the Department of the Treasury's Office of Foreign Assets Control (OFAC) sanctioned 11 individuals and entities supporting the regime of Syrian President Bashar Al-Assad through the facilitation of illicit financial transfers and trafficking of illegal…",
-                    url = "https://www.globalsecurity.org/wmd/library/news/syria/2024/syria-240326-treasury01.htm",
-                    publishedAt = "2024-03-28T18:12:04Z",
-                ),
-            )
-        ),
+        FavoritesAction.Loaded(Article.generateFakeData(3)),
         {},
         Modifier.fillMaxSize()
     )

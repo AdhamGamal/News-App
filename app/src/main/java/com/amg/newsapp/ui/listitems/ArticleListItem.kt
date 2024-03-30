@@ -115,13 +115,7 @@ fun ArticleListItem(
 @Composable
 fun ArticleListItemPreview() {
     ArticleListItem(
-        article = Article(
-            author = "John Pike",
-            title = "U.S., Seychelles Conduct Bilateral Maritime Security engagements",
-            description = "Over the course of 7 days from March 14-21, 2024, United States Coast Guard Law Enforcement Detachment (LEDET) personnel worked alongside their counterparts in the Seychelles Coast Guard during multiple bilateral maritime security engagements in Seychelles' E…",
-            url = "https://www.globalsecurity.org/military/library/news/2024/03/mil-240324-usn02.htm",
-            publishedAt = "2024-03-27T09:14:44Z",
-        ),
+        article = Article.generateFakeData(1)[0],
         onFavoriteClick = {},
         onUnFavoriteClick = {},
         modifier = Modifier.fillMaxWidth()
