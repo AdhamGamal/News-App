@@ -21,6 +21,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.amg.newsapp.models.Article
 import com.amg.newsapp.models.NoNetworkException
 import com.amg.newsapp.models.SearchNotFoundException
+import com.amg.newsapp.screens.SharedArticleViewModel
 import com.amg.newsapp.ui.layouts.ErrorLayout
 import com.amg.newsapp.ui.layouts.LoadingLayout
 import com.amg.newsapp.ui.listitems.ArticleListItem
@@ -31,6 +32,7 @@ import kotlinx.coroutines.flow.flowOf
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel(),
+    sharedArticleVM: SharedArticleViewModel = hiltViewModel(),
 ) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -46,8 +48,10 @@ fun SearchScreen(
             keyboardController?.hide()
         },
         onFavorite = {
+            sharedArticleVM.addToFavorites(it)
         },
         onUnFavorite = {
+            sharedArticleVM.removeFromFavorites(it)
         },
         modifier = Modifier.fillMaxSize()
     )

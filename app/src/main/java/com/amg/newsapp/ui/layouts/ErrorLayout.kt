@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.amg.newsapp.models.NoFavoritesException
 import com.amg.newsapp.models.NoNetworkException
 import com.amg.newsapp.models.SearchMinCharacterException
 import com.amg.newsapp.models.SearchNotFoundException
@@ -16,19 +17,23 @@ import com.amg.newsapp.models.SearchNotFoundException
 fun ErrorLayout(throwable: Throwable, modifier: Modifier = Modifier) {
     val message = when (throwable) {
         is NoNetworkException -> {
-            "Network Issue...!!"
+            "Network issue. Please check your internet connection and try again."
         }
 
         is SearchMinCharacterException -> {
-            "Use at least 3 characters to search...!"
+            "Please enter at least 3 characters to perform a search."
         }
 
         is SearchNotFoundException -> {
-            "Search Not Found...!!"
+            "No results found for your search query."
+        }
+
+        is NoFavoritesException -> {
+            "You don't have any favorites yet. Add some favorites to see them here."
         }
 
         else -> {
-            "Something went wrong...!"
+            "Oops! Something went wrong. Please try again later."
         }
     }
 

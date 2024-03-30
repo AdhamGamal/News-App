@@ -12,10 +12,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -34,9 +30,6 @@ fun ArticleListItem(
     onUnFavoriteClick: (Article) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
-    var isFavorite by remember { mutableStateOf(article.isFavorite()) }
-
     Card(
         modifier = modifier.padding(10.dp),
         shape = RoundedCornerShape(5.dp),
@@ -63,17 +56,16 @@ fun ArticleListItem(
                 )
                 IconButton(
                     onClick = {
-                        if (isFavorite) {
+                        if (article.isFavorite()) {
                             onUnFavoriteClick(article)
                         } else {
                             onFavoriteClick(article)
                         }
-                        isFavorite = !isFavorite
                     }
                 ) {
                     Icon(
                         modifier = Modifier.size(24.dp),
-                        painter = if (isFavorite)
+                        painter = if (article.isFavorite())
                             painterResource(R.drawable.ic_favorite)
                         else
                             painterResource(R.drawable.ic_unfavorite),
