@@ -4,11 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.amg.newsapp.models.Article
 import com.amg.newsapp.network.api.NewsApiService
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
-private const val STARTING_PAGE_INDEX = 0
+private const val STARTING_PAGE_INDEX = 1
 
 class NewsPagingSource(
     private val service: NewsApiService,
@@ -19,11 +16,11 @@ class NewsPagingSource(
         val page = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response = service.searchNews(query, getCurrentDate(), page, params.loadSize)
-            val photos = response.articles.map { it.toArticle() }
+            val articles = response.articles.map { it.toArticle() }
             LoadResult.Page(
-                data = photos,
+                data = articles,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1,
-                nextKey = if (page == response.totalResults) null else page + 1
+                nextKey = if ((page * params.loadSize) >= (response.totalResults ?: 0)) null else page + 1
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)
@@ -37,8 +34,11 @@ class NewsPagingSource(
     }
 
     private fun getCurrentDate(): String {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val date = Date()
-        return dateFormat.format(date)
+        /*
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val date = Date()
+                return dateFormat.format(date)
+        */
+        return "2024-03-25"
     }
 }
