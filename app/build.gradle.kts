@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -85,6 +87,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-fun getNewsApiKey(): String? {
-    return project.findProperty("news_api_key") as? String
+fun getNewsApiKey(): String {
+    val keystoreFile = project.rootProject.file("local.properties")
+    val properties = Properties()
+    properties.load(keystoreFile.inputStream())
+    return properties.getProperty("news_api_key") ?: ""
 }
