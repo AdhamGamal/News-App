@@ -40,6 +40,7 @@ fun SearchScreen(
 
     SearchScreen(
         viewModel.uiState,
+        viewModel.showTextFlag,
         favorites,
         onSearch = {
             viewModel.search(it)
@@ -63,6 +64,7 @@ fun SearchScreen(
 @Composable
 fun SearchScreen(
     uiState: SearchAction,
+    showText: Boolean,
     favorites: Map<String, Article>,
     onSearch: (String) -> Unit,
     onClear: (String) -> Unit,
@@ -91,7 +93,7 @@ fun SearchScreen(
             is SearchAction.Loaded -> {
 
                 with(uiState.articles.collectAsLazyPagingItems()) {
-                    if (itemCount == 0) {
+                    if (itemCount == 0 && showText) {
                         when {
                             loadState.refresh is LoadState.Loading || loadState.append is LoadState.Loading -> {
                                 LoadingLayout(Modifier.fillMaxSize())
@@ -150,7 +152,7 @@ fun SearchScreen(
 private fun GalleryScreenPreview(
     @PreviewParameter(GalleryScreenPreviewParamProvider::class) articles: Flow<PagingData<Article>>
 ) {
-    SearchScreen(SearchAction.Loaded(articles), emptyMap(), {}, {}, {}, {}, Modifier.fillMaxSize())
+    SearchScreen(SearchAction.Loaded(articles), true, emptyMap(), {}, {}, {}, {}, Modifier.fillMaxSize())
 }
 
 private class GalleryScreenPreviewParamProvider :
