@@ -12,8 +12,9 @@ import com.amg.newsapp.models.NoNetworkException
 import com.amg.newsapp.models.SearchMinCharacterException
 import com.amg.newsapp.network.NetworkUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -42,6 +43,7 @@ class SearchViewModel @Inject constructor(
         uiState = try {
             SearchAction.Loaded(networkUC.getSearchResultStream(query).cachedIn(viewModelScope))
         } catch (ex: Exception) {
+            Timber.e(ex);
             SearchAction.Error(NoNetworkException())
         }
     }

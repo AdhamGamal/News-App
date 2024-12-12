@@ -4,6 +4,10 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.amg.newsapp.models.Article
 import com.amg.newsapp.network.api.NewsApiService
+import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 private const val STARTING_PAGE_INDEX = 1
 
@@ -22,8 +26,9 @@ class NewsPagingSource(
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1,
                 nextKey = if ((page * params.loadSize) >= (response.totalResults ?: 0)) null else page + 1
             )
-        } catch (exception: Exception) {
-            LoadResult.Error(exception)
+        } catch (ex: Exception) {
+            Timber.e(ex);
+            LoadResult.Error(ex)
         }
     }
 
@@ -34,11 +39,8 @@ class NewsPagingSource(
     }
 
     private fun getCurrentDate(): String {
-        /*
-                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val date = Date()
-                return dateFormat.format(date)
-        */
-        return "2024-03-25"
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val date = Date()
+        return dateFormat.format(date)
     }
 }
