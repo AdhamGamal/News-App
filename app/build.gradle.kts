@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.sentry)
 }
 
 android {
@@ -22,7 +23,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField("String", "NEWS_API_KEY", "\"" + getNewsApiKey() + "\"")
+        buildConfigField("String", "NEWS_API_KEY", "\"" + getLocalProp("news_api_key") + "\"")
+        manifestPlaceholders["SENTRY_DSN"] = getLocalProp("sentry_dsn")
     }
 
     buildTypes {
@@ -78,6 +80,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.timber)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -87,9 +90,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 }
 
-fun getNewsApiKey(): String {
+fun getLocalProp(key: String): String {
     val keystoreFile = project.rootProject.file("local.properties")
     val properties = Properties()
     properties.load(keystoreFile.inputStream())
-    return properties.getProperty("news_api_key") ?: ""
+    return properties.getProperty(key) ?: ""
 }
